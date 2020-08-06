@@ -1,0 +1,119 @@
+﻿<Window x:Class="WorkForm.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WorkForm"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="465" Width="1000" Loaded="Window_Loaded">
+    <Grid>
+
+        <TabControl MinWidth="793" MinHeight="415" RenderTransformOrigin="0.491,0.504" Margin="5">
+            <TabItem Header="Сотрудники" x:Name="WorkerTab">
+                <Grid Grid.ColumnSpan="1" Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="390"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition MinHeight="388"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <GroupBox Grid.Row="0" Grid.Column="0" Header="Добавление" HorizontalAlignment="Right" Width="390">
+                        <Grid>
+                            <Label Content="Фамилия" HorizontalAlignment="Left" Margin="19,10,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Выберите пол:" HorizontalAlignment="Left" Margin="19,130,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="WorkerSurnameField" HorizontalAlignment="Left" Height="23" Margin="19,36,0,0" TextWrapping="Wrap" Text="Введите фамилию" VerticalAlignment="Top" Width="164" Foreground="Gray" GotFocus="WorkerSurnameField_GotFocus" LostFocus="WorkerSurnameField_LostFocus"/>
+                            <Label Content="Имя" HorizontalAlignment="Left" Margin="200,9,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="WorkerNameField" HorizontalAlignment="Left" Height="23" Margin="200,36,0,0" TextWrapping="Wrap" Text="Введите имя" VerticalAlignment="Top" Width="164" SpellCheck.IsEnabled="True" Foreground="Gray" RenderTransformOrigin="0.482,0.043" GotFocus="WorkerNameField_GotFocus" LostFocus="WorkerNameField_LostFocus" />
+                            <Label Content="Отчество" HorizontalAlignment="Left" Margin="19,67,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="WorkerPatronymicField" HorizontalAlignment="Left" Height="23" Margin="19,93,0,0" TextWrapping="Wrap" Text="Введите отчество" VerticalAlignment="Top" Width="164" Foreground="Gray" GotFocus="WorkerPatronymicField_GotFocus" LostFocus="WorkerPatronymicField_LostFocus"/>
+                            <DatePicker Name="WorkerBthDayDatePicker"  HorizontalAlignment="Left" Margin="200,92,0,0" VerticalAlignment="Top" Width="164" Foreground="Gray"/>
+                            <Label Content="Дата Рождения" HorizontalAlignment="Left" Margin="200,66,0,0" VerticalAlignment="Top"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="115,135,0,0">
+                                <RadioButton x:Name="SexRBM"  Margin="0,0,0,216">Мужской</RadioButton>
+                                <RadioButton x:Name="SexRBF" Margin="20,0,0,216">Женский</RadioButton>
+                            </StackPanel>
+                            <ComboBox Name="WorkerComboBox" HorizontalAlignment="Left" Margin="19,192,0,0" VerticalAlignment="Top" Width="345"/>
+                            <Label Content="Выберите подразделение:" HorizontalAlignment="Left" Margin="20,161,0,0" VerticalAlignment="Top"/>
+                            <Button x:Name="AddWorkerBtn" Content="Добавить" HorizontalAlignment="Left" Margin="19,254,0,0" VerticalAlignment="Top" Width="345" Height="42" Click="AddWorkerBtn_Click"/>
+                            <Button x:Name="WorkerListBtn" Content="Просмотр в новом окне" HorizontalAlignment="Left" Margin="19,301,0,0" VerticalAlignment="Top" Width="345" Height="42" Click="WorkerListBtn_Click"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="0" Grid.Column="1" Header="Просмотр">
+                        <DataGrid x:Name="WorkerDataGridView" Margin="5,6" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Surname}" Header="Фамилия" Width="100"/>
+                                <DataGridTextColumn Binding="{Binding Name}" Header="Имя" Width="80"/>
+                                <DataGridTextColumn Binding="{Binding Patronymic}" Header="Отчество" Width="100"/>
+                                <DataGridTextColumn Binding="{Binding BthDay}" Header="Дата Рождения" Width="115"/>
+                                <DataGridTextColumn Binding="{Binding Sex}" Header="Пол" Width="35"/>
+                                <DataGridTextColumn Binding="{Binding SubdivisionID}" Header="ID Подразделения" Width="110"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Подразделения" x:Name="SubdivisionTab">
+                <Grid Grid.ColumnSpan="1" Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="390"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition MinHeight="388"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <GroupBox Grid.Row="0" Grid.Column="0" Header="Добавление" HorizontalAlignment="Right" Width="390">
+                        <Grid>
+                            <Label Content="Название " HorizontalAlignment="Left" Margin="17,13,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="SubdivisionNameField" HorizontalAlignment="Left" Height="23" Margin="17,39,0,0" TextWrapping="Wrap" Text="Введите название" VerticalAlignment="Top" Width="345" SpellCheck.IsEnabled="True" Foreground="Gray" GotFocus="SubdivisionNameField_GotFocus" LostFocus="SubdivisionNameField_LostFocus"/>
+                            <ComboBox Name="SubdivisionComboBox" HorizontalAlignment="Left" Margin="17,98,0,0" VerticalAlignment="Top" Width="345"/>
+                            <Label Content="Выберите руководителя:" HorizontalAlignment="Left" Margin="17,72,0,0" VerticalAlignment="Top"/>
+                            <Button x:Name="AddSubdivisionBtn"  Content="Добавить" HorizontalAlignment="Left" Margin="17,151,0,0" VerticalAlignment="Top" Width="345" Height="42" Click="AddSubdivisionBtn_Click"/>
+                            <Button x:Name="SubdivisionListBtn"  Content="Просмотр в новом окне" HorizontalAlignment="Left" Margin="17,198,0,0" VerticalAlignment="Top" Width="345" Height="42" Click="SubdivisionListBtn_Click"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="0" Grid.Column="1" Header="Просмотр">
+                        <DataGrid x:Name="SubdivisionsDataGridView" Margin="5,6"  AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Name}" Header="Название" Width="120"/>
+                                <DataGridTextColumn Binding="{Binding WorkerID}" Header="ID Руководителя" Width="100"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Заказы" x:Name="OrderTab" Foreground="Black">
+                <Grid Grid.ColumnSpan="1" Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="390"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition MinHeight="388"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <GroupBox Grid.Row="0" Grid.Column="0" Header="Добавление" HorizontalAlignment="Right" Width="390">
+                        <Grid>
+                            <Label Content="Название товара" HorizontalAlignment="Left" Margin="7,79,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="OrderNameField" HorizontalAlignment="Left" Height="23" Margin="7,106,0,0" TextWrapping="Wrap" Text="Введите название" VerticalAlignment="Top" Width="345" SpellCheck.IsEnabled="True" Foreground="Gray" GotFocus="OrderNameField_GotFocus" LostFocus="OrderNameField_LostFocus"/>
+                            <ComboBox Name="OrderComboBox" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" Width="342"/>
+                            <Label Content="Выберите сотрудника:" HorizontalAlignment="Left" Margin="7,134,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Номер заказа" HorizontalAlignment="Left" Margin="7,24,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="OrderNumberField" HorizontalAlignment="Left" Height="23" Margin="7,51,0,0" TextWrapping="Wrap" Text="Введите номер заказа" VerticalAlignment="Top" Width="345" SpellCheck.IsEnabled="True" Foreground="Gray" GotFocus="OrderNumberField_GotFocus" LostFocus="OrderNumberField_LostFocus"/>
+                            <Button x:Name="AddOrderBtn" Content="Добавить" HorizontalAlignment="Left" Margin="10,214,0,0" VerticalAlignment="Top" Width="345" Height="42" Click="AddOrderBtn_Click"/>
+                            <Button x:Name="OrderListBtn" Content="Просмотр в новом окне" HorizontalAlignment="Left" Margin="10,261,0,0" VerticalAlignment="Top" Width="345" Height="42" Click="OrderListBtn_Click"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="0" Grid.Column="1" Header="Просмотр">
+                        <DataGrid x:Name="OrdersDataGridView" Margin="5,6"  AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Number}" Header="Номер" Width="80"/>
+                                <DataGridTextColumn Binding="{Binding Name}" Header="Название товара" Width="140"/>
+                                <DataGridTextColumn Binding="{Binding WorkerID}" Header="ID Руководителя" Width="100"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
