@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -99,27 +100,12 @@ namespace WorkForm
             else if (SexRBM.IsChecked == true) Sex = "М";
             
             if (WorkerSurnameField.Text != "Введите фамилию" && WorkerNameField.Text != "Введите имя" && WorkerPatronymicField.Text != "Введите отчество" && WorkerBthDayDatePicker.Text != null && Sex != null && WorkerComboBox.SelectedItem != null) {
-                
-                string sql = "INSERT INTO Workers(Surname,Name,Patronymic,BthDay,Sex,SubdivisionID) VALUES ('" + WorkerSurnameField.Text + "','" + WorkerNameField.Text + "','" + WorkerPatronymicField.Text + "','" + WorkerBthDayDatePicker.Text + "', '" + Sex + "', '" + WorkerComboBox.SelectedValue + "');";
-                SqlConnection connection = new SqlConnection(connectionString);
-                try
+                using (DataContext dataContext = new DataContext())
                 {
-                    connection.Open();
-                    Console.WriteLine("Подключение: Да");
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    int number = command.ExecuteNonQuery();
-                    Console.WriteLine("Добавлено объектов: {0}", number);
-                    MessageBox.Show("Данные успешно добавлены.");
-                }
-                catch (SqlException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    connection.Close();
-                    Console.WriteLine("Подключение закрыто...");
+                    Worker worker = new Worker { Surname = WorkerSurnameField.Text, Name = WorkerNameField.Text, Patronymic = WorkerPatronymicField.Text, BthDay = WorkerBthDayDatePicker.Text, Sex = Sex, SubdivisionID = (int)WorkerComboBox.SelectedValue};
+                    dataContext.Workers.Add(worker);
+                    dataContext.SaveChanges(); 
+                    Console.WriteLine("Объекты успешно сохранены");
 
                     UpdateDataGridView("Workers");
                     WorkerSurnameField.Text = "Введите фамилию";
@@ -133,7 +119,6 @@ namespace WorkForm
                     WorkerComboBox.SelectedItem = null;
                     SexRBF.IsChecked = false;
                     SexRBM.IsChecked = false;
-
                 }
             }
             else MessageBox.Show("Необходимо заполнить все поля для добавления в базу!");
@@ -251,26 +236,12 @@ namespace WorkForm
         {
             if (SubdivisionNameField.Text != "Введите название" && SubdivisionComboBox.SelectedItem != null)
             {
-                string sql = "INSERT INTO Subdivisions(Name,WorkerID) VALUES ('" + SubdivisionNameField.Text + "', '" + SubdivisionComboBox.SelectedValue + "');";
-                SqlConnection connection = new SqlConnection(connectionString);
-                try
+                using (DataContext dataContext = new DataContext())
                 {
-                    connection.Open();
-                    Console.WriteLine("Подключение: Да");
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    int number = command.ExecuteNonQuery();
-                    Console.WriteLine("Добавлено объектов: {0}", number);
-                    MessageBox.Show("Данные успешно добавлены.");
-                }
-                catch (SqlException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    connection.Close();
-                    Console.WriteLine("Подключение закрыто...");
+                    Subdivision subdivision = new Subdivision { Name = SubdivisionNameField.Text, WorkerID = (int) SubdivisionComboBox.SelectedValue };
+                    dataContext.Subdivisions.Add(subdivision);
+                    dataContext.SaveChanges();
+                    Console.WriteLine("Объекты успешно сохранены");
 
                     UpdateDataGridView("Subdivisions");
                     SubdivisionNameField.Text = "Введите название";
@@ -285,26 +256,12 @@ namespace WorkForm
         {
             if (OrderNumberField.Text != "Введите номер заказа" && OrderNameField.Text != "Введите название" && OrderComboBox.SelectedItem != null)
             {
-                string sql = "INSERT INTO Orders(Number,Name,WorkerID) VALUES ('" + OrderNumberField.Text + "','" + OrderNameField.Text + "', '" + OrderComboBox.SelectedValue + "');";
-                SqlConnection connection = new SqlConnection(connectionString);
-                try
+                using (DataContext dataContext = new DataContext())
                 {
-                    connection.Open();
-                    Console.WriteLine("Подключение: Да");
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    int number = command.ExecuteNonQuery();
-                    Console.WriteLine("Добавлено объектов: {0}", number);
-                    MessageBox.Show("Данные успешно добавлены.");
-                }
-                catch (SqlException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    connection.Close();
-                    Console.WriteLine("Подключение закрыто...");
+                    Order order = new Order { Number = OrderNumberField.Text, Name = OrderNameField.Text, WorkerID = (int)OrderComboBox.SelectedValue };
+                    dataContext.Orders.Add(order);
+                    dataContext.SaveChanges();
+                    Console.WriteLine("Объекты успешно сохранены");
 
                     UpdateDataGridView("Orders");
                     OrderNameField.Text = "Введите название";

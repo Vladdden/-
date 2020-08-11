@@ -19,3 +19,8 @@ C:\Users\Владислав\source\repos\WorkForm\WorkForm\obj\Debug\WorkerList.
 C:\Users\Владислав\source\repos\WorkForm\WorkForm\obj\Debug\OrderList.baml
 C:\Users\Владислав\source\repos\WorkForm\WorkForm\obj\Debug\SubdivisionList.baml
 C:\Users\Владислав\source\repos\WorkForm\WorkForm\obj\Debug\WorkerList.baml
+C:\Users\Владислав\source\repos\WorkForm\WorkForm\bin\Debug\EntityFramework.dll
+C:\Users\Владислав\source\repos\WorkForm\WorkForm\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Владислав\source\repos\WorkForm\WorkForm\bin\Debug\EntityFramework.xml
+C:\Users\Владислав\source\repos\WorkForm\WorkForm\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Владислав\source\repos\WorkForm\WorkForm\obj\Debug\WorkForm.csproj.CopyComplete
